@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serrana Representações</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #0D2A66; 
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    scroll-behavior: smooth; /* rolagem suave */
+  }
+  .container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    padding: 25px;
+    color: #0D2A66;
+    text-align: center;
+  }
+  /* Logo redonda e centralizada */
+  img.logo {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    display: block;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #0D2A66;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* Carrossel */
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-track img {
+    min-width: 100%;
+    border-radius: 12px;
+  }
+  .carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  .carousel-buttons button {
+    pointer-events: all;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  .carousel-buttons button:hover {
+    background: rgba(0,0,0,0.8);
+  }
+
+  footer {
+    font-size: 12px;
+    color: #888;
+    margin-top: 15px;
+  }
+
+  /* Botão WhatsApp fixo */
+  .whatsapp-fixo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    z-index: 1000;
+  }
+  .whatsapp-fixo:hover {
+    background: #128C7E;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Logo redonda -->
+  <img src="logo.png" alt="Serrana Representações" class="logo">
+
+  <h1>Serrana Representações</h1>
+  <p>Líder em vendas de fios e cabos elétricos, eletrocalhas, perfis, leitos e acessórios.<br>
+  Eletroduto em PVC, com e sem rosca.</p>
+
+  <!-- Carrossel de produtos -->
+  <div class="carousel">
+    <div class="carousel-track">
+      <img src="eletrocalhas.jpg" alt="eletrocalhas">
+      <img src="fios.eletricos.jpg" alt="Cabos Elétricos">
+      <img src="tubos.de.passagem.jpg" alt="Eletrodutos">
+    </div>
+    <div class="carousel-buttons">
+      <button id="prev">&#10094;</button>
+      <button id="next">&#10095;</button>
+    </div>
+  </div>
+
+  <footer>&copy; 2026 Serrana Representações</footer>
+</div>
+
+<!-- Botão WhatsApp fixo -->
+<a href="https://wa.me/5549999024057?text=Ol%C3%A1,%20vi%20o%20cat%C3%A1logo%20da%20Serrana%20Representa%C3%A7%C3%B5es%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.%20%23feito%20com%20%E2%98%95%20e%20c%C3%B3digo" class="whatsapp-fixo">
+  WhatsApp
+</a>
+
+
+<script>
+  const track = document.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+  let currentIndex = 0;
+
+  function updateCarousel() {
+    const width = slides[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${currentIndex * width}px)`;
+  }
+
+  window.addEventListener('resize', updateCarousel);
+
+  nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  });
+
+  prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
+
+  // Auto scroll
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  }, 5000);
+</script>
+
+</body>
+</html>
